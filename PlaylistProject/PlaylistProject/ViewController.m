@@ -17,6 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    NSString *artistName = @"drake";
+    NSString *artistSearchUrl = @"http://developer.echonest.com/api/v4/artist/search";
+    NSDictionary *params = @{@"api_key": @"0N9TCBWKIBVXAP0GY", @"name": artistName};
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
 }
 
 - (void)didReceiveMemoryWarning {
