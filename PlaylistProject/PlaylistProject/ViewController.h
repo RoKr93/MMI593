@@ -2,14 +2,12 @@
 //  ViewController.h
 //  PlaylistProject
 //
-//  Created by Roshan Krishnan on 1/14/16.
-//  Copyright (c) 2016 Roshan Krishnan. All rights reserved.
+//  Created by Roshan Krishnan on 1/15/16.
+//  Copyright © 2016 Roshan Krishnan. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
 
-
 @end
-

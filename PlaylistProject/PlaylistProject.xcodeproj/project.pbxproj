@@ -9,11 +9,9 @@
 /* Begin PBXBuildFile section */
 		3F7911041C481BDE0062E65A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7911031C481BDE0062E65A /* main.m */; };
 		3F7911071C481BDE0062E65A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7911061C481BDE0062E65A /* AppDelegate.m */; };
-		3F79110A1C481BDE0062E65A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7911091C481BDE0062E65A /* ViewController.m */; };
-		3F79110D1C481BDE0062E65A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F79110B1C481BDE0062E65A /* Main.storyboard */; };
-		3F79110F1C481BDE0062E65A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F79110E1C481BDE0062E65A /* Images.xcassets */; };
-		3F7911121C481BDE0062E65A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F7911101C481BDE0062E65A /* LaunchScreen.xib */; };
 		3F79111E1C481BDF0062E65A /* PlaylistProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F79111D1C481BDF0062E65A /* PlaylistProjectTests.m */; };
+		3FFD1AB71C49875D003DB207 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFD1AB51C49875D003DB207 /* ViewController.m */; };
+		3FFD1AB81C49875D003DB207 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FFD1AB61C49875D003DB207 /* ViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +30,12 @@
 		3F7911031C481BDE0062E65A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3F7911051C481BDE0062E65A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3F7911061C481BDE0062E65A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3F7911081C481BDE0062E65A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3F7911091C481BDE0062E65A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		3F79110C1C481BDE0062E65A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3F79110E1C481BDE0062E65A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		3F7911111C481BDE0062E65A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3F7911171C481BDF0062E65A /* PlaylistProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaylistProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F79111C1C481BDF0062E65A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F79111D1C481BDF0062E65A /* PlaylistProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaylistProjectTests.m; sourceTree = "<group>"; };
+		3FFD1AB41C49875D003DB207 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		3FFD1AB51C49875D003DB207 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3FFD1AB61C49875D003DB207 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,12 +79,10 @@
 			children = (
 				3F7911051C481BDE0062E65A /* AppDelegate.h */,
 				3F7911061C481BDE0062E65A /* AppDelegate.m */,
-				3F7911081C481BDE0062E65A /* ViewController.h */,
-				3F7911091C481BDE0062E65A /* ViewController.m */,
-				3F79110B1C481BDE0062E65A /* Main.storyboard */,
-				3F79110E1C481BDE0062E65A /* Images.xcassets */,
-				3F7911101C481BDE0062E65A /* LaunchScreen.xib */,
 				3F7911011C481BDE0062E65A /* Supporting Files */,
+				3FFD1AB41C49875D003DB207 /* ViewController.h */,
+				3FFD1AB51C49875D003DB207 /* ViewController.m */,
+				3FFD1AB61C49875D003DB207 /* ViewController.xib */,
 			);
 			path = PlaylistProject;
 			sourceTree = "<group>";
@@ -199,9 +193,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F79110D1C481BDE0062E65A /* Main.storyboard in Resources */,
-				3F7911121C481BDE0062E65A /* LaunchScreen.xib in Resources */,
-				3F79110F1C481BDE0062E65A /* Images.xcassets in Resources */,
+				3FFD1AB81C49875D003DB207 /* ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,7 +211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F79110A1C481BDE0062E65A /* ViewController.m in Sources */,
+				3FFD1AB71C49875D003DB207 /* ViewController.m in Sources */,
 				3F7911071C481BDE0062E65A /* AppDelegate.m in Sources */,
 				3F7911041C481BDE0062E65A /* main.m in Sources */,
 			);
@@ -242,25 +234,6 @@
 			targetProxy = 3F7911181C481BDF0062E65A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		3F79110B1C481BDE0062E65A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3F79110C1C481BDE0062E65A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3F7911101C481BDE0062E65A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3F7911111C481BDE0062E65A /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		3F79111F1C481BDF0062E65A /* Debug */ = {
@@ -416,6 +389,7 @@
 				3F7911231C481BDF0062E65A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3F7911241C481BDF0062E65A /* Build configuration list for PBXNativeTarget "PlaylistProjectTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +398,7 @@
 				3F7911261C481BDF0062E65A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
