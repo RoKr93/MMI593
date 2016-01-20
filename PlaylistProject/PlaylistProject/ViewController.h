@@ -11,4 +11,8 @@
 
 @interface ViewController : UIViewController
 
+@property IBOutlet UITextField *artistInput;
+@property IBOutlet UIButton *generateButton;
+@property IBOutlet UITableView *playlistTable;
+
 @end
