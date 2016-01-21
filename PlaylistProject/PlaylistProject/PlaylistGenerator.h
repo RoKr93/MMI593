@@ -7,8 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFNetworking/AFNetworking.h"
 
 @interface PlaylistGenerator : NSObject
+
+@property (strong, nonatomic) NSString *apiKey;
+@property (strong, nonatomic) NSString *artistSearchUrl;
+
+- (id)init;
+- (void)searchForArtistWithName:(NSString *)artist;
 
 @end

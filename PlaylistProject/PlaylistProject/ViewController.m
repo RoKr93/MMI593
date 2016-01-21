@@ -31,6 +31,8 @@
 - (IBAction)generateButtonPressed:(id)sender
 {
     //Make a playlist generator object??
+    PlaylistGenerator *pg = [[PlaylistGenerator alloc] init];
+    [pg searchForArtistWithName:@"drake"];
 }
 
 /*

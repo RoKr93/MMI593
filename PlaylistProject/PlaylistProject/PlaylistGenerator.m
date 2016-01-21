@@ -15,13 +15,34 @@
     if (self){
         // superclass successfully initialized, further
         // initialization happens here ...
-        NSString *artistName = @"drake";
-        NSString *artistSearchUrl = @"http://developer.echonest.com/api/v4/artist/search";
-        NSDictionary *params = @{@"api_key": @"0N9TCBWKIBVXAP0GY", @"name": artistName};
-        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        self.artistSearchUrl = @"http://developer.echonest.com/api/v4/artist/search";
+        self.apiKey = @"0N9TCBWKIBVXAP0GY";
     }
     return self;
+}
+
+-(void)searchForArtistWithName:(NSString *)artist {
+    // create the GET request string
+    NSString *urlString = [NSString stringWithFormat:self.artistSearchUrl, @"?api_key=", self.apiKey, @"?name=", artist];
+    
+    // create an NSURL from the string
+    NSURL *reqUrl = [NSURL URLWithString:urlString];
+    
+    // create the request
+    NSURLRequest
+    /*AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager GET:self.artistSearchUrl
+      parameters:artistSearchParams
+         success:^(NSURLSessionDataTask *task, id responseObject) {
+             NSArray *responseArtists = responseObject;
+             for(int i = 0; i < responseArtists.count; i++){
+                 NSLog(@"%@\n", responseArtists[i]);
+             }
+         }failure:^(NSURLSessionDataTask *task, NSError *error) {
+             NSLog(@"%@", error);
+         }
+     ];*/
 }
 
 @end
