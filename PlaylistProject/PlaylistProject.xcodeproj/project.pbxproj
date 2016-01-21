@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2042BB351C5082540098675E /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 2042BB341C5082540098675E /* Song.m */; };
 		3F36F9D21C50628100FB3792 /* PlaylistGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F36F9D11C50628100FB3792 /* PlaylistGenerator.m */; };
 		3F7911041C481BDE0062E65A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7911031C481BDE0062E65A /* main.m */; };
 		3F7911071C481BDE0062E65A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7911061C481BDE0062E65A /* AppDelegate.m */; };
@@ -27,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2042BB331C5082540098675E /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
+		2042BB341C5082540098675E /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
 		3F36F9D01C50628100FB3792 /* PlaylistGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistGenerator.h; sourceTree = "<group>"; };
 		3F36F9D11C50628100FB3792 /* PlaylistGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistGenerator.m; sourceTree = "<group>"; };
 		3F7910FE1C481BDE0062E65A /* PlaylistProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlaylistProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +94,8 @@
 				3F36F9D01C50628100FB3792 /* PlaylistGenerator.h */,
 				3F36F9D11C50628100FB3792 /* PlaylistGenerator.m */,
 				3FFD1AB61C49875D003DB207 /* ViewController.xib */,
+				2042BB331C5082540098675E /* Song.h */,
+				2042BB341C5082540098675E /* Song.m */,
 			);
 			path = PlaylistProject;
 			sourceTree = "<group>";
@@ -220,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2042BB351C5082540098675E /* Song.m in Sources */,
 				3FFD1AB71C49875D003DB207 /* ViewController.m in Sources */,
 				3F7911071C481BDE0062E65A /* AppDelegate.m in Sources */,
 				3F7911041C481BDE0062E65A /* main.m in Sources */,

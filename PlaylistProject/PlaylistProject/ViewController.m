@@ -8,8 +8,11 @@
 
 #import "ViewController.h"
 
+#define pCellID @"playlistCellID"
+
 @interface ViewController ()
 
+@property PlaylistGenerator *generator;
 @property NSMutableArray *generatedPlaylist;
 
 @end
@@ -20,6 +23,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.generator = [[PlaylistGenerator alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -31,8 +36,59 @@
 - (IBAction)generateButtonPressed:(id)sender
 {
     //Make a playlist generator object??
-    PlaylistGenerator *pg = [[PlaylistGenerator alloc] init];
-    [pg searchForArtistWithName:@"drake"];
+    NSString *artist = self.artistInput.text;
+    self.generatedPlaylist = [self.generator generatePlaylistWithArtist:artist];
+    [self updateTable];
+}
+
+- (void)updateTable
+{
+    
+}
+
+#pragma mark - Table View Delegates
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger rows = 0;
+    if (self.generatedPlaylist != nil)
+    {
+        rows = self.generatedPlaylist.count;
+    }
+    
+    return rows;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 80.0f;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *title = [NSString stringWithFormat:@"Playlist Generated Starting With: %@", self.artistInput.text];
+    return title;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:pCellID];
+    
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:pCellID];
+    }
+    
+    Song *thisSong = [self.generatedPlaylist objectAtIndex:indexPath.row];
+    [cell.textLabel setText:[NSString stringWithFormat:@"%@ by %@", thisSong.title, thisSong.artist]];
+    
+    return cell;
+>>>>>>> 1befac5dc6ec8e885e2beb0dcf96627b3194175e
 }
 
 /*

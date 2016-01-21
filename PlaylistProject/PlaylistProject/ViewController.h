@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PlaylistGenerator.h"
+#import "Song.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property IBOutlet UITextField *artistInput;
 @property IBOutlet UIButton *generateButton;
