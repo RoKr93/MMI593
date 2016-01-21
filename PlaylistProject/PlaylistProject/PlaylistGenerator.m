@@ -62,7 +62,7 @@
     }
     else {
         NSArray *artists = [[jsonArray objectForKey:@"response"] objectForKey:@"artists"];
-        NSString *artistId = [artists[0] objectForKey:@"id"];
+        artistId = [artists[0] objectForKey:@"id"];
         //NSLog(@"Array: %@", artistId);
     }
     
