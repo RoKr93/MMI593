@@ -41,6 +41,7 @@
     // handle possible error (poorly)
     if(error != nil){
         NSLog(@"Error with GET request.");
+        return;
     }
     
     // parse the JSON
