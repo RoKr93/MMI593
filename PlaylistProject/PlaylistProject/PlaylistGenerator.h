@@ -15,6 +15,8 @@
 
 - (id)init;
 - (NSString *)searchForArtistWithName:(NSString *)artist;
-- (NSString *)getArtistSongs:(NSString *)artistId;
+- (NSDictionary *)doHttpRequestWithUrl:(NSString *)urlString;
+- (NSMutableArray *)getArtistSongs:(NSString *)artistId;
+- (NSMutableArray *)getSongTitles:(NSArray *)songs;
 
 @end
