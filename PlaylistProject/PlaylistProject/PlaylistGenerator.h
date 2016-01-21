@@ -14,6 +14,7 @@
 @property (strong, nonatomic) NSString *artistSearchUrl;
 
 - (id)init;
-- (void)searchForArtistWithName:(NSString *)artist;
+- (NSString *)searchForArtistWithName:(NSString *)artist;
+- (NSString *)getArtistSongs:(NSString *)artistId;
 
 @end

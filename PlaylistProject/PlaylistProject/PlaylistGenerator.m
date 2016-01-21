@@ -21,9 +21,12 @@
     return self;
 }
 
--(void)searchForArtistWithName:(NSString *)artist {
+
+// Takes the name of an artist- returns the Echo Nest ID of that artist
+-(NSString *)searchForArtistWithName:(NSString *)artist {
     // create the GET request string
-    NSString *urlString = [NSString stringWithFormat:self.artistSearchUrl, @"?api_key=", self.apiKey, @"?name=", artist];
+    NSString *urlString = [NSString stringWithFormat:@"%@?api_key=%@&name=%@", self.artistSearchUrl, self.apiKey, artist];
+    NSLog(@"%@", urlString);
     
     // create an NSURL from the string
     NSURL *url = [NSURL URLWithString:urlString];
@@ -39,37 +42,31 @@
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     // handle possible error (poorly)
+    // TODO: more robust error handling?
     if(error != nil){
         NSLog(@"Error with GET request.");
-        return;
+        return NULL;
     }
     
     // parse the JSON
     NSError *jError = nil;
-    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&jError];
+    NSDictionary *jsonArray = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&jError];
     
+    // string to store the ID of the top artist
+    NSString *artistId = NULL;
+    
+    // TODO: again, maybe be less terrible about handling this error
     if (error != nil) {
         NSLog(@"Error parsing JSON.");
+        return NULL;
     }
     else {
-        NSLog(@"Array: %@", jsonArray);
+        NSArray *artists = [[jsonArray objectForKey:@"response"] objectForKey:@"artists"];
+        NSString *artistId = [artists[0] objectForKey:@"id"];
+        //NSLog(@"Array: %@", artistId);
     }
     
-    
-    
-    /*AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager GET:self.artistSearchUrl
-      parameters:artistSearchParams
-         success:^(NSURLSessionDataTask *task, id responseObject) {
-             NSArray *responseArtists = responseObject;
-             for(int i = 0; i < responseArtists.count; i++){
-                 NSLog(@"%@\n", responseArtists[i]);
-             }
-         }failure:^(NSURLSessionDataTask *task, NSError *error) {
-             NSLog(@"%@", error);
-         }
-     ];*/
+    return artistId;
 }
 
 @end
