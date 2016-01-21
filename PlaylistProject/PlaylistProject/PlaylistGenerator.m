@@ -26,10 +26,15 @@
     NSString *urlString = [NSString stringWithFormat:self.artistSearchUrl, @"?api_key=", self.apiKey, @"?name=", artist];
     
     // create an NSURL from the string
-    NSURL *reqUrl = [NSURL URLWithString:urlString];
+    NSURL *url = [NSURL URLWithString:urlString];
     
     // create the request
-    NSURLRequest
+    NSURLRequest * getReq = [NSURLRequest requestWithURL:url];
+    
+    // create variables to hold response and/or error
+    NSURLResponse *response;
+    NSError *error;
+    
     /*AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager GET:self.artistSearchUrl
