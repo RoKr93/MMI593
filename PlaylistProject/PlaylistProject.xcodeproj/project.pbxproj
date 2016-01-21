@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F36F9D21C50628100FB3792 /* PlaylistGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F36F9D11C50628100FB3792 /* PlaylistGenerator.m */; };
 		3F7911041C481BDE0062E65A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7911031C481BDE0062E65A /* main.m */; };
 		3F7911071C481BDE0062E65A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7911061C481BDE0062E65A /* AppDelegate.m */; };
 		3F79111E1C481BDF0062E65A /* PlaylistProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F79111D1C481BDF0062E65A /* PlaylistProjectTests.m */; };
@@ -26,6 +27,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F36F9D01C50628100FB3792 /* PlaylistGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistGenerator.h; sourceTree = "<group>"; };
+		3F36F9D11C50628100FB3792 /* PlaylistGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistGenerator.m; sourceTree = "<group>"; };
 		3F7910FE1C481BDE0062E65A /* PlaylistProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlaylistProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F7911021C481BDE0062E65A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F7911031C481BDE0062E65A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -85,6 +88,8 @@
 				3F7911011C481BDE0062E65A /* Supporting Files */,
 				3FFD1AB41C49875D003DB207 /* ViewController.h */,
 				3FFD1AB51C49875D003DB207 /* ViewController.m */,
+				3F36F9D01C50628100FB3792 /* PlaylistGenerator.h */,
+				3F36F9D11C50628100FB3792 /* PlaylistGenerator.m */,
 				3FFD1AB61C49875D003DB207 /* ViewController.xib */,
 			);
 			path = PlaylistProject;
@@ -218,6 +223,7 @@
 				3FFD1AB71C49875D003DB207 /* ViewController.m in Sources */,
 				3F7911071C481BDE0062E65A /* AppDelegate.m in Sources */,
 				3F7911041C481BDE0062E65A /* main.m in Sources */,
+				3F36F9D21C50628100FB3792 /* PlaylistGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
