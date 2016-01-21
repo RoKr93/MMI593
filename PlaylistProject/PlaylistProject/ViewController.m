@@ -37,7 +37,8 @@
 {
     //Make a playlist generator object??
     NSString *artist = self.artistInput.text;
-    self.generatedPlaylist = [self.generator generatePlaylistWithArtist:artist];
+    //self.generatedPlaylist = [self.generator generatePlaylistWithArtist:artist];
+    [self.generator searchForArtistWithName:artist];
     [self updateTable];
 }
 
@@ -88,7 +89,6 @@
     [cell.textLabel setText:[NSString stringWithFormat:@"%@ by %@", thisSong.title, thisSong.artist]];
     
     return cell;
->>>>>>> 1befac5dc6ec8e885e2beb0dcf96627b3194175e
 }
 
 /*

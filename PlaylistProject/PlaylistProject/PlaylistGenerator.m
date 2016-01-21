@@ -29,11 +29,32 @@
     NSURL *url = [NSURL URLWithString:urlString];
     
     // create the request
-    NSURLRequest * getReq = [NSURLRequest requestWithURL:url];
+    NSURLRequest * request = [NSURLRequest requestWithURL:url];
     
     // create variables to hold response and/or error
     NSURLResponse *response;
     NSError *error;
+    
+    // send our request away
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    // handle possible error (poorly)
+    if(error != nil){
+        NSLog(@"Error with GET request.");
+    }
+    
+    // parse the JSON
+    NSError *jError = nil;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&jError];
+    
+    if (error != nil) {
+        NSLog(@"Error parsing JSON.");
+    }
+    else {
+        NSLog(@"Array: %@", jsonArray);
+    }
+    
+    
     
     /*AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
