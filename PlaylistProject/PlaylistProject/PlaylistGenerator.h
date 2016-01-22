@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Song.h"
 
 @interface PlaylistGenerator : NSObject
 
@@ -16,9 +17,9 @@
 - (id)init;
 - (NSString *)searchForArtistWithName:(NSString *)artist;
 - (NSDictionary *)doHttpRequestWithUrl:(NSString *)urlString;
-- (NSMutableArray *)getArtistSongs:(NSString *)artistId;
+- (NSMutableArray *)getArtistSongsById:(NSString *)artistId andName:(NSString *)artistName;
 - (NSMutableArray *)getSongTitles:(NSArray *)songs;
 - (NSMutableArray *)getFeaturedArtists:(NSMutableArray *)songTitles;
-- (NSMutableArray *)generatePlaylist:(NSString *)artist;
+- (NSMutableArray *)generatePlaylist:(NSString *)artist withLength:(int)size;
 
 @end

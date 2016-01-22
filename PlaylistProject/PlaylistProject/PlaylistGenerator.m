@@ -69,29 +69,50 @@
     if(result != NULL){
         NSArray *artists = [[result objectForKey:@"response"] objectForKey:@"artists"];
         artistId = [artists[0] objectForKey:@"id"];
+        NSMutableArray *songs = [self getArtistSongsById:artistId andName:artist];
+        for(Song *s in songs){
+            NSLog(@"Artist: %@\nTitle: %@\nUUID: %@\n", s.artist, s.title, s.UUID);
+        }
         //NSLog(@"%@", artistId);
-        //NSArray *songs = [self getArtistSongs:artistId];
-        //[self getSongTitles:songs];
     }
     return artistId;
 }
 
-- (NSMutableArray *)getArtistSongs:(NSString *)artistId {
+// return all songs that contain featured artists
+- (NSMutableArray *)getArtistSongsById:(NSString *)artistId andName:(NSString *)artistName {
     if(artistId == NULL)
         return NULL;
-    // create the GET request string
-    NSString *urlString = [NSString stringWithFormat:@"%@/songs?api_key=%@&id=%@&format=json&start=0&results=100", self.artistSearchUrl, self.apiKey, artistId];
-    NSLog(@"%@", urlString);
     
-    // do the HTTP request
-    // cast it to a string; it'll be simpler just to search through this
     NSArray *songs = NULL;
-    NSDictionary *result = [self doHttpRequestWithUrl:urlString];
-    if(result != NULL){
-        songs = [[result objectForKey:@"response"] objectForKey:@"songs"];
-        //NSLog(@"%@", songs);
+    NSMutableArray *songsWithFeatured = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i <= 300; i += 100){
+        // create the GET request string
+        NSString *urlString = [NSString stringWithFormat:@"%@/songs?api_key=%@&id=%@&format=json&start=%d&results=100", self.artistSearchUrl, self.apiKey, artistId, i];
+        NSLog(@"%@", urlString);
+        
+        // do the HTTP request
+        NSDictionary *result = [self doHttpRequestWithUrl:urlString];
+        if(result != NULL){
+            songs = [[result objectForKey:@"response"] objectForKey:@"songs"];
+            //NSLog(@"%@", songs);
+            // get the songs that contain featured artists
+            for(NSObject *song in songs){
+                NSString *title = [song valueForKey:@"title"];
+                NSString *uuid = [song valueForKey:@"id"];
+                NSUInteger feat = [title rangeOfString:@"feat." options:NSCaseInsensitiveSearch].location;
+                NSUInteger featuring = [title rangeOfString:@"featuring" options:NSCaseInsensitiveSearch].location;
+                
+                // if an artist is featured, add it to the mutable array
+                if(feat != NSNotFound || featuring != NSNotFound){
+                    Song *newSong = [[Song alloc] initWithTitle:title Artist:artistName andUUID:uuid];
+                    [songsWithFeatured addObject:newSong];
+                }
+            }
+        }
     }
-    return [self getSongTitles:songs];
+    
+    return songsWithFeatured;
 }
 
 // helper function that returns an array of song titles in string format
@@ -118,7 +139,18 @@
     return NULL;
 }
 
-- (NSMutableArray *)generatePlaylist:(NSString *)artist {
+- (NSMutableArray *)generatePlaylist:(NSString *)artist withLength:(int)size {
+    // create the empty playlist array
+    NSMutableArray *playlist = [[NSMutableArray alloc] init];
+    
+    // create a local variable to store the current artist in
+    NSString *currentArtist = artist;
+    
+    for(int i = 0; i < size; i++){
+        NSString *artistId = [self searchForArtistWithName:currentArtist];
+        NSMutableArray *songs = [self getArtistSongsById:artistId andName:currentArtist];
+        NSMutableArray *featured = [self getFeaturedArtists:[self getSongTitles:songs]];
+    }
     return NULL;
 }
 
