@@ -115,18 +115,6 @@
     return songsWithFeatured;
 }
 
-// helper function that returns an array of song titles in string format
-- (NSMutableArray *)getSongTitles:(NSArray *)songs {
-    NSMutableArray *titles = [[NSMutableArray alloc] init];
-    if(songs == NULL)
-        return NULL;
-    for(NSObject *obj in songs){
-        NSString *title = [obj valueForKey:@"title"];
-        [titles addObject:[NSString stringWithFormat:@"%@", title]];
-    }
-    return titles;
-}
-
 - (NSMutableArray *)getFeaturedArtists:(NSMutableArray *)allSongs
 {
     if(allSongs == NULL)
@@ -166,7 +154,8 @@
     for(int i = 0; i < size; i++){
         NSString *artistId = [self searchForArtistWithName:currentArtist];
         NSMutableArray *songs = [self getArtistSongsById:artistId andName:currentArtist];
-        NSMutableArray *featured = [self getFeaturedArtists:[self getSongTitles:songs]];
+        NSMutableArray *featured = [self getFeaturedArtists:songs];
+        // TODO: select song for playlist and featured artist to use for the next artist
     }
     return NULL;
 }
