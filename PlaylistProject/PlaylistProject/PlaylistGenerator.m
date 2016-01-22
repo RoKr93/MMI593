@@ -69,10 +69,10 @@
     if(result != NULL){
         NSArray *artists = [[result objectForKey:@"response"] objectForKey:@"artists"];
         artistId = [artists[0] objectForKey:@"id"];
-        NSMutableArray *songs = [self getArtistSongsById:artistId andName:artist];
+        /*NSMutableArray *songs = [self getArtistSongsById:artistId andName:artist];
         for(Song *s in songs){
             NSLog(@"Artist: %@\nTitle: %@\nUUID: %@\n", s.artist, s.title, s.UUID);
-        }
+        }*/
         //NSLog(@"%@", artistId);
     }
     return artistId;
@@ -144,7 +144,7 @@
     return featuredArtists;
 }
 
-- (NSMutableArray *)generatePlaylist:(NSString *)artist withLength:(int)size {
+- (NSMutableArray *)generatePlaylistWithArtist:(NSString *)artist andLength:(int)size {
     // create the empty playlist array
     NSMutableArray *playlist = [[NSMutableArray alloc] init];
     
@@ -155,9 +155,14 @@
         NSString *artistId = [self searchForArtistWithName:currentArtist];
         NSMutableArray *songs = [self getArtistSongsById:artistId andName:currentArtist];
         NSMutableArray *featured = [self getFeaturedArtists:songs];
-        // TODO: select song for playlist and featured artist to use for the next artist
+        
+        // right now we're just gonna select the first song/first featured artist to use
+        // TODO: better way to select next song/featured artist
+        [playlist addObject:songs[1]];
+        currentArtist = featured[1];
     }
-    return NULL;
+    
+    return playlist;
 }
 
 @end
