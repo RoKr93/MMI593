@@ -38,7 +38,8 @@
     // handle possible error (poorly)
     // TODO: more robust error handling?
     if(error != nil){
-        NSLog(@"Error with GET request: %@", urlString);
+        //NSLog(@"Error with GET request: %@", urlString);
+        NSLog(@"%@", error);
         return NULL;
     }
     
@@ -57,8 +58,9 @@
 
 // Takes the name of an artist- returns the Echo Nest ID of that artist
 -(NSString *)searchForArtistWithName:(NSString *)artist {
+    NSString *formattedArtist = [artist stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     // create the GET request string
-    NSString *urlString = [NSString stringWithFormat:@"%@/search?api_key=%@&name=%@", self.artistSearchUrl, self.apiKey, artist];
+    NSString *urlString = [NSString stringWithFormat:@"%@/search?api_key=%@&name=%@", self.artistSearchUrl, self.apiKey, formattedArtist];
     NSLog(@"%@", urlString);
 
     // do the HTTP request
