@@ -17,9 +17,8 @@
 - (id)init;
 - (NSString *)searchForArtistWithName:(NSString *)artist;
 - (NSDictionary *)doHttpRequestWithUrl:(NSString *)urlString;
-- (NSMutableArray *)getArtistSongs:(NSString *)artistId;
-- (NSMutableArray *)getSongTitles:(NSArray *)songs;
+- (NSMutableArray *)getArtistSongsById:(NSString *)artistId andName:(NSString *)artistName;
 - (NSMutableArray *)getFeaturedArtists:(NSMutableArray *)songTitles;
-- (NSMutableArray *)generatePlaylist:(NSString *)artist;
+- (NSMutableArray *)generatePlaylistWithArtist:(NSString *)artist andLength:(int)size;
 
 @end
