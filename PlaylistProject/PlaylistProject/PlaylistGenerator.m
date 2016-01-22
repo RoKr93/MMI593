@@ -106,16 +106,33 @@
     return titles;
 }
 
-- (NSMutableArray *)getFeaturedArtists:(NSMutableArray *)songTitles {
-    if(songTitles == NULL)
+- (NSMutableArray *)getFeaturedArtists:(NSMutableArray *)allSongs
+{
+    if(allSongs == NULL)
         return NULL;
-    for(NSString *title in songTitles){
-        int location = [title rangeOfString:@"feat." options:NSCaseInsensitiveSearch].location;
-        if(location != NSNotFound){
+    
+    NSMutableArray *featuredArtists = [[NSMutableArray alloc] init];
+    for(Song *aSong in allSongs)
+    {
+        NSRange featRange = [aSong.title rangeOfString:@"feat." options:NSCaseInsensitiveSearch];
         
+        if (featRange.length == 0)
+        {
+            featRange = [aSong.title rangeOfString:@"featuring" options:NSCaseInsensitiveSearch];
+        }
+        
+        if(featRange.length != 0)
+        {
+            NSMutableArray *allArtists = [[[aSong.title substringFromIndex:(featRange.location + featRange.length)] componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@",&"]] mutableCopy];
+            
+            for (int i = 0; i < allArtists.count; i++)
+            {
+                [featuredArtists addObject:[allArtists[i] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+            }
         }
     }
-    return NULL;
+    
+    return featuredArtists;
 }
 
 - (NSMutableArray *)generatePlaylist:(NSString *)artist {

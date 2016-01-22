@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Song.h"
 
 @interface PlaylistGenerator : NSObject
 
