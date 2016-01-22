@@ -25,6 +25,8 @@
     // Do any additional setup after loading the view from its nib.
     
     self.generator = [[PlaylistGenerator alloc] init];
+    [self.playlistTable setDelegate:self];
+    [self.playlistTable setDataSource:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,12 +41,7 @@
     NSString *artist = self.artistInput.text;
     //self.generatedPlaylist = [self.generator generatePlaylistWithArtist:artist];
     [self.generator searchForArtistWithName:artist];
-    [self updateTable];
-}
-
-- (void)updateTable
-{
-    
+    [self.playlistTable reloadData];
 }
 
 #pragma mark - Table View Delegates
@@ -72,7 +69,13 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    NSString *title = [NSString stringWithFormat:@"Playlist Generated Starting With: %@", self.artistInput.text];
+    NSString *title = @"~Generated Playlist~";
+    
+//    if (self.generatedPlaylist != nil)
+//    {
+//        title = [NSString stringWithFormat:@"Playlist Generated Starting With: %@", self.artistInput.text];
+//    }
+    
     return title;
 }
 
