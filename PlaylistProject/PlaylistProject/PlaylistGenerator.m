@@ -89,7 +89,7 @@
     for(int i = 0; i <= 300; i += 100){
         // create the GET request string
         NSString *urlString = [NSString stringWithFormat:@"%@/songs?api_key=%@&id=%@&format=json&start=%d&results=100", self.artistSearchUrl, self.apiKey, artistId, i];
-        NSLog(@"%@", urlString);
+        //NSLog(@"%@", urlString);
         
         // do the HTTP request
         NSDictionary *result = [self doHttpRequestWithUrl:urlString];
@@ -156,10 +156,14 @@
         NSMutableArray *songs = [self getArtistSongsById:artistId andName:currentArtist];
         NSMutableArray *featured = [self getFeaturedArtists:songs];
         
-        // right now we're just gonna select the first song/first featured artist to use
-        // TODO: better way to select next song/featured artist
-        [playlist addObject:songs[1]];
-        currentArtist = featured[1];
+        // right now we're just gonna select a random song/first featured artist to use
+        // TODO: possible better way to select next song/featured artist?
+        int randIndex = arc4random() % songs.count;
+        while([currentArtist isEqualToString:featured[randIndex]]){
+            randIndex = arc4random() % songs.count;
+        }
+        [playlist addObject:songs[randIndex]];
+        currentArtist = featured[randIndex];
     }
     
     return playlist;
