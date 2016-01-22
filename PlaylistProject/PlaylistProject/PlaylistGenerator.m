@@ -38,7 +38,7 @@
     // handle possible error (poorly)
     // TODO: more robust error handling?
     if(error != nil){
-        NSLog(@"Error with searchForArtistWithName GET request.");
+        NSLog(@"Error with GET request: %@", urlString);
         return NULL;
     }
     
@@ -104,6 +104,22 @@
         [titles addObject:[NSString stringWithFormat:@"%@", title]];
     }
     return titles;
+}
+
+- (NSMutableArray *)getFeaturedArtists:(NSMutableArray *)songTitles {
+    if(songTitles == NULL)
+        return NULL;
+    for(NSString *title in songTitles){
+        int location = [title rangeOfString:@"feat." options:NSCaseInsensitiveSearch].location;
+        if(location != NSNotFound){
+        
+        }
+    }
+    return NULL;
+}
+
+- (NSMutableArray *)generatePlaylist:(NSString *)artist {
+    return NULL;
 }
 
 @end
