@@ -136,7 +136,11 @@
             
             for (int i = 0; i < allArtists.count; i++)
             {
-                [featuredArtists addObject:[allArtists[i] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+                NSString *a = allArtists[i];
+                
+                a = [a substringToIndex:[a rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"()"]].location];
+                
+                [featuredArtists addObject:[a stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
             }
         }
     }
