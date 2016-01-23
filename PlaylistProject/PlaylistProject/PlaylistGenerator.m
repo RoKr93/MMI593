@@ -140,7 +140,11 @@
             {
                 NSString *a = allArtists[i];
                 
-                a = [a substringToIndex:[a rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"()"]].location];
+                NSRange symRange = [a rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"()"]];
+                if (symRange.length != 0)
+                {
+                    a = [a substringToIndex:symRange.location];
+                }
                 
                 [featuredArtists addObject:[a stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
             }
