@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PlaylistProject/PlaylistGenerator.m"
-            timestampString = "475135308.678835"
+            timestampString = "475135521.181535"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
-            landmarkName = "-generatePlaylistWithArtist:andLength:"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "-getFeaturedArtists:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
