@@ -43,7 +43,7 @@
     self.generatedPlaylist = [self.generator generatePlaylistWithArtist:artist andLength:5];
     for(Song *s in self.generatedPlaylist)
     {
-        NSLog(@"Artist: %@\nTitle: %@\nUUID: %@\n", s.artist, s.title, s.UUID);
+        [s print];
     }
 
     [self.playlistTable reloadData];

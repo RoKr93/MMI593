@@ -8,108 +8,110 @@
 
 #import "PlaylistGenerator.h"
 
+@interface PlaylistGenerator ()
+
+@property DEBUG_LEVEL PG_DEBUG;
+
+@end
+
 @implementation PlaylistGenerator
 
-- (id)init {
+- (id)init
+{
     self = [super init];
-    if (self){
+    
+    if (self)
+    {
         // superclass successfully initialized, further
         // initialization happens here ...
         self.artistSearchUrl = @"http://developer.echonest.com/api/v4/artist";
         self.apiKey = @"0N9TCBWKIBVXAP0GY";
+        
+        self.PG_DEBUG = DEBUG_STANDARD;
     }
+    
     return self;
 }
 
-- (NSDictionary *)doHttpRequestWithUrl:(NSString *)urlString {
-    // create an NSURL from the string
-    NSURL *url = [NSURL URLWithString:urlString];
-    
-    // create the request
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-    
-    // create variables to hold response and/or error
-    NSURLResponse *response;
-    NSError *error;
-    
-    // send our request away
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    // handle possible error (poorly)
-    // TODO: more robust error handling?
-    if(error != nil){
-        //NSLog(@"Error with GET request: %@", urlString);
-        NSLog(@"%@", error);
-        return NULL;
-    }
-    
-    // parse the JSON
-    NSError *jError = nil;
-    NSDictionary *jsonArray = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&jError];
-    
-    if (jError != nil) {
-        NSLog(@"Error parsing JSON.");
-        return NULL;
-    }
-
-    return jsonArray;
-}
-
+#pragma mark - Artist Functions
 
 // Takes the name of an artist- returns the Echo Nest ID of that artist
--(NSString *)searchForArtistWithName:(NSString *)artist {
+-(NSString *)searchForArtistWithName:(NSString *)artist
+{
+    // Replace spaces in the Artist's name with '%20'
     NSString *formattedArtist = [artist stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     formattedArtist = [formattedArtist stringByReplacingOccurrencesOfString:@"'" withString:@"%27"];
     // create the GET request string
     NSString *urlString = [NSString stringWithFormat:@"%@/search?api_key=%@&name=%@", self.artistSearchUrl, self.apiKey, formattedArtist];
-    NSLog(@"%@", urlString);
+    
+    if (self.PG_DEBUG >= DEBUG_STANDARD)
+        NSLog(@"%@", urlString);
 
     // do the HTTP request
     NSDictionary *result = [self doHttpRequestWithUrl:urlString];
     
     // parse the result, extracting the first artist result and getting its ID
     NSString *artistId = NULL;
-    if(result != NULL){
-        NSArray *artists = [[result objectForKey:@"response"] objectForKey:@"artists"];
+    if(result != NULL)
+    {
+        NSArray *artists = [result objectForKey:@"artists"];
         artistId = [artists[0] objectForKey:@"id"];
-        /*NSMutableArray *songs = [self getArtistSongsById:artistId andName:artist];
-        for(Song *s in songs){
-            NSLog(@"Artist: %@\nTitle: %@\nUUID: %@\n", s.artist, s.title, s.UUID);
-        }*/
-        //NSLog(@"%@", artistId);
+        
+        if (self.PG_DEBUG >= DEBUG_VERBOSE)
+        {
+            NSLog(@"Printing Returned Artists\n\n");
+            for (int i = 0; i < artists.count; i++)
+            {
+                NSLog(@"%d: %@\n", i, [artists[i] objectForKey:@"name"]);
+            }
+        }
     }
     return artistId;
 }
 
 // return all songs that contain featured artists
-- (NSMutableArray *)getArtistSongsById:(NSString *)artistId andName:(NSString *)artistName {
+- (NSMutableArray *)getArtistSongsById:(NSString *)artistId andName:(NSString *)artistName
+{
     if(artistId == NULL)
         return NULL;
     
     NSArray *songs = NULL;
     NSMutableArray *songsWithFeatured = [[NSMutableArray alloc] init];
     
-    for(int i = 0; i <= 300; i += 100){
+    if (self.PG_DEBUG >= DEBUG_VERBOSE)
+        NSLog(@"Printing All of %@'s Songs with Featured Artists...\n\n", artistName);
+        
+    for(int i = 0; i <= 300; i += 100)
+    {
         // create the GET request string
         NSString *urlString = [NSString stringWithFormat:@"%@/songs?api_key=%@&id=%@&format=json&start=%d&results=100", self.artistSearchUrl, self.apiKey, artistId, i];
-        //NSLog(@"%@", urlString);
+
+        if (self.PG_DEBUG >= DEBUG_STANDARD)
+            NSLog(@"%@", urlString);
         
         // do the HTTP request
         NSDictionary *result = [self doHttpRequestWithUrl:urlString];
-        if(result != NULL){
-            songs = [[result objectForKey:@"response"] objectForKey:@"songs"];
-            //NSLog(@"%@", songs);
+        
+        if(result != NULL)
+        {
+            songs = [result objectForKey:@"songs"];
+            
             // get the songs that contain featured artists
-            for(NSObject *song in songs){
+            for(NSObject *song in songs)
+            {
                 NSString *title = [song valueForKey:@"title"];
                 NSString *uuid = [song valueForKey:@"id"];
-                NSUInteger feat = [title rangeOfString:@"feat." options:NSCaseInsensitiveSearch].location;
-                NSUInteger featuring = [title rangeOfString:@"featuring" options:NSCaseInsensitiveSearch].location;
+                NSRange feat = [title rangeOfString:@"feat." options:NSCaseInsensitiveSearch];
+                NSRange featuring = [title rangeOfString:@"featuring" options:NSCaseInsensitiveSearch];
                 
                 // if an artist is featured, add it to the mutable array
-                if(feat != NSNotFound || featuring != NSNotFound){
+                if(feat.length != 0 || featuring.length != 0)
+                {
                     Song *newSong = [[Song alloc] initWithTitle:title Artist:artistName andUUID:uuid];
                     [songsWithFeatured addObject:newSong];
+                    
+                    if (self.PG_DEBUG >= DEBUG_VERBOSE)
+                        [newSong print];
                 }
             }
         }
@@ -155,7 +157,8 @@
     return featuredArtists;
 }*/
 
-- (NSMutableArray *)generatePlaylistWithArtist:(NSString *)artist andLength:(int)size {
+- (NSMutableArray *)generatePlaylistWithArtist:(NSString *)artist andLength:(int)size
+{
     // create the empty playlist array
     NSMutableArray *playlist = [[NSMutableArray alloc] init];
     
@@ -168,6 +171,8 @@
     int count = 0;
     while(count < size){
         NSString *artistId = [self searchForArtistWithName:currentArtist];
+        
+        //Get an array of Songs by the Current Artist
         NSMutableArray *songs = [self getArtistSongsById:artistId andName:currentArtist];
         //NSMutableArray *featured = [self getFeaturedArtists:songs];
         int randIndex = -1;
@@ -200,6 +205,43 @@
     }
     
     return playlist;
+}
+
+#pragma mark - Helper Functions
+
+- (NSDictionary *)doHttpRequestWithUrl:(NSString *)urlString
+{
+    // create an NSURL from the string
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    // create the request
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    // create variables to hold response and/or error
+    NSURLResponse *response;
+    NSError *error;
+    
+    // send our request away
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    // handle possible error (poorly)
+    // TODO: more robust error handling?
+    if(error != nil)
+    {
+        NSLog(@"%@", error);
+        return NULL;
+    }
+    
+    // parse the JSON
+    NSDictionary *jsonArray = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
+    
+    if (error != nil)
+    {
+        NSLog(@"Error parsing JSON.");
+        return NULL;
+    }
+    
+    return [jsonArray objectForKey:@"response"];
 }
 
 @end

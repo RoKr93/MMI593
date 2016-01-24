@@ -18,4 +18,6 @@
 - (id)initWithTitle:(NSString *)title Artist:(NSString *)artist andUUID:(NSString *)uuid;
 - (NSMutableArray *)getFeaturedArtists;
 
+- (void)print;
+
 @end
