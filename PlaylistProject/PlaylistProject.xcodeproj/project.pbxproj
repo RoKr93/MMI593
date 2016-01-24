@@ -30,6 +30,7 @@
 /* Begin PBXFileReference section */
 		2042BB331C5082540098675E /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
 		2042BB341C5082540098675E /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
+		206A675E1C5446FC00E3D0CE /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		3F36F9D01C50628100FB3792 /* PlaylistGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistGenerator.h; sourceTree = "<group>"; };
 		3F36F9D11C50628100FB3792 /* PlaylistGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistGenerator.m; sourceTree = "<group>"; };
 		3F7910FE1C481BDE0062E65A /* PlaylistProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlaylistProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +92,7 @@
 				3F7911011C481BDE0062E65A /* Supporting Files */,
 				3FFD1AB41C49875D003DB207 /* ViewController.h */,
 				3FFD1AB51C49875D003DB207 /* ViewController.m */,
+				206A675E1C5446FC00E3D0CE /* Constants.h */,
 				3F36F9D01C50628100FB3792 /* PlaylistGenerator.h */,
 				3F36F9D11C50628100FB3792 /* PlaylistGenerator.m */,
 				3FFD1AB61C49875D003DB207 /* ViewController.xib */,

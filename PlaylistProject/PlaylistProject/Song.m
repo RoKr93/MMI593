@@ -24,4 +24,9 @@
     return self;
 }
 
+- (void)print
+{
+    NSLog(@"Artist: %@\nTitle: %@\nUUID: %@\n", self.artist, self.title, self.UUID);
+}
+
 @end

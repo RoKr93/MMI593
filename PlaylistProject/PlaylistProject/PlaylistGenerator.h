@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Constants.h"
 #import "Song.h"
+
+//#define PG_DEBUG DEBUG_STANDARD
 
 @interface PlaylistGenerator : NSObject
 

@@ -17,4 +17,6 @@
 
 - (id)initWithTitle:(NSString *)title Artist:(NSString *)artist andUUID:(NSString *)uuid;
 
+- (void)print;
+
 @end
