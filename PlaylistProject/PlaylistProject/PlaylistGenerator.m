@@ -59,6 +59,7 @@
 // Takes the name of an artist- returns the Echo Nest ID of that artist
 -(NSString *)searchForArtistWithName:(NSString *)artist {
     NSString *formattedArtist = [artist stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    formattedArtist = [formattedArtist stringByReplacingOccurrencesOfString:@"'" withString:@"%27"];
     // create the GET request string
     NSString *urlString = [NSString stringWithFormat:@"%@/search?api_key=%@&name=%@", self.artistSearchUrl, self.apiKey, formattedArtist];
     NSLog(@"%@", urlString);
@@ -117,9 +118,9 @@
     return songsWithFeatured;
 }
 
-- (NSMutableArray *)getFeaturedArtists:(NSMutableArray *)allSongs
+/*- (NSMutableArray *)getFeaturedArtists:(Song *)aSong
 {
-    if(allSongs == NULL)
+    if(aSong == NULL)
         return NULL;
     
     NSMutableArray *featuredArtists = [[NSMutableArray alloc] init];
@@ -152,7 +153,7 @@
     }
     
     return featuredArtists;
-}
+}*/
 
 - (NSMutableArray *)generatePlaylistWithArtist:(NSString *)artist andLength:(int)size {
     // create the empty playlist array
@@ -160,20 +161,42 @@
     
     // create a local variable to store the current artist in
     NSString *currentArtist = artist;
+    NSString *previousArtist = nil;
+    int lastRandIndex = -1;
+    int lastFeatIndex = -1;
     
-    for(int i = 0; i < size; i++){
+    int count = 0;
+    while(count < size){
         NSString *artistId = [self searchForArtistWithName:currentArtist];
         NSMutableArray *songs = [self getArtistSongsById:artistId andName:currentArtist];
-        NSMutableArray *featured = [self getFeaturedArtists:songs];
+        //NSMutableArray *featured = [self getFeaturedArtists:songs];
+        int randIndex = -1;
+        int featIndex = -1;
         
-        // right now we're just gonna select a random song/first featured artist to use
-        // TODO: possible better way to select next song/featured artist?
-        int randIndex = arc4random() % songs.count;
-        while([currentArtist isEqualToString:featured[randIndex]]){
+        if(songs.count == 0){
+            if(previousArtist == nil){
+                NSLog(@"User entered an artist with no featured collaborators.");
+            }else{
+                currentArtist = previousArtist;
+            }
+        }else{
+            // right now we're just gonna select a random song/first featured artist to use
+            // TODO: possible better way to select next song/featured artist?
             randIndex = arc4random() % songs.count;
+            NSMutableArray *feat = [songs[randIndex] featuredArtists];
+            featIndex = arc4random() % feat.count;
+            
+            while([currentArtist isEqualToString:feat[featIndex]] || (randIndex == lastRandIndex && featIndex == lastFeatIndex)){
+                randIndex = arc4random() % songs.count;
+                featIndex = arc4random() % feat.count;
+            }
+            [playlist addObject:songs[randIndex]];
+            previousArtist = currentArtist;
+            currentArtist = feat[featIndex];
+            count++;
+            lastRandIndex = randIndex;
+            lastFeatIndex = featIndex;
         }
-        [playlist addObject:songs[randIndex]];
-        currentArtist = featured[randIndex];
     }
     
     return playlist;

@@ -12,9 +12,10 @@
 
 @property NSString *title;
 @property NSString *artist;
-
+@property NSMutableArray *featuredArtists;
 @property NSString *UUID;
 
 - (id)initWithTitle:(NSString *)title Artist:(NSString *)artist andUUID:(NSString *)uuid;
+- (NSMutableArray *)getFeaturedArtists;
 
 @end
