@@ -40,7 +40,7 @@
     //Make a playlist generator object??
     NSString *artist = self.artistInput.text;
     
-    self.generatedPlaylist = [self.generator generatePlaylistWithArtist:artist andLength:5];
+    self.generatedPlaylist = [self.generator generatePlaylistWithArtist:artist andLength:10];
     for(Song *s in self.generatedPlaylist)
     {
         [s print];

@@ -55,6 +55,8 @@
     if(result != NULL)
     {
         NSArray *artists = [result objectForKey:@"artists"];
+        if(artists.count == 0)
+            return NULL;
         artistId = [artists[0] objectForKey:@"id"];
         
         if (self.PG_DEBUG >= DEBUG_VERBOSE)
@@ -178,7 +180,13 @@
         int randIndex = -1;
         int featIndex = -1;
         
-        if(songs.count == 0){
+        if(songs == NULL){
+            if(previousArtist == nil){
+                NSLog(@"User entered an artist who could not be found in the database.");
+            }else{
+                currentArtist = previousArtist;
+            }
+        }else if(songs.count == 0){
             if(previousArtist == nil){
                 NSLog(@"User entered an artist with no featured collaborators.");
             }else{
@@ -193,6 +201,7 @@
             
             while([currentArtist isEqualToString:feat[featIndex]] || (randIndex == lastRandIndex && featIndex == lastFeatIndex)){
                 randIndex = arc4random() % songs.count;
+                feat = [songs[randIndex] featuredArtists];
                 featIndex = arc4random() % feat.count;
             }
             [playlist addObject:songs[randIndex]];
